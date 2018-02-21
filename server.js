@@ -25,7 +25,7 @@ app.use(morgan('short'))
 app.use(logger)
 
 // Routes
-app.use('/api', require('./routes/api-routes.js'))
+app.use(require('./routes/api-routes.js'))
 app.use(require('./routes/html-routes.js'))
 
 db.sequelize.sync()

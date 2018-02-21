@@ -3,11 +3,11 @@ var postControl = require('../controller/postController')
 
 var router = express.Router()
 
-router.route('/posts')
+router.route('/api/posts')
   .get(postControl.allPost)
   .post(postControl.addPost)
 
-router.route('/posts/:id')
+router.route('/api/posts/:id')
   .put(postControl.updatePost)
 
 module.exports = router

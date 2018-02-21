@@ -5,7 +5,6 @@ module.exports = {
     db.Posts.findAll({
       where: {
         isDeleted: false,
-        userID: req.body.id
       }
     }).then(data => {
       res.status(200).json(data)
@@ -14,7 +13,8 @@ module.exports = {
     })
   },
   addPost: function (req, res) {
-    db.Posts.create({req}).then(() => {
+    console.log(req.body)
+    db.Posts.create(req.body).then(() => {
       res.status(200).send('Post added')
     }).catch(error => {
       console.log(error)
@@ -23,13 +23,17 @@ module.exports = {
   updatePost: function (req, res) {
     db.Posts.update({
       isDeleted: true
-    }, 
+    },
     {
       where: {
         id: req.params.id
       }
-    }).then(() => {
-      res.status(200).send('Post deleted')
+    }).then((data) => {
+      if(data[0] === 0){
+        res.status(404).send('No affected data')
+      } else {
+        res.status(200).send('Post updated')
+      }
     }).catch(error => {
       console.log(error)
     })
