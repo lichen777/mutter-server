@@ -5,9 +5,14 @@ module.exports = {
     db.Posts.findAll({
       where: {
         isDeleted: false,
+        userID: 11
       }
     }).then(data => {
-      res.status(200).json(data)
+      if(data.length === 0) {
+        res.status(404).send('No data found')
+      } else {
+        res.status(200).json(data)
+      }
     }).catch(error => {
       console.log(error)
     })
@@ -26,7 +31,7 @@ module.exports = {
     },
     {
       where: {
-        id: req.params.id
+        id: req.body.id
       }
     }).then((data) => {
       if(data[0] === 0){
