@@ -4,9 +4,9 @@ module.exports = {
   allPost: function (req, res) {
     db.Posts.findAll({
       where: {
-        isDeleted: false,
         userID: 11
-      }
+      },
+      order: [['id', 'DESC']]
     }).then(data => {
       if(data.length === 0) {
         res.status(404).send('No data found')
@@ -26,12 +26,13 @@ module.exports = {
     })
   },
   updatePost: function (req, res) {
+    console.log(req.params)
     db.Posts.update({
       isDeleted: true
     },
     {
       where: {
-        id: req.body.id
+        id: req.params.id
       }
     }).then((data) => {
       if(data[0] === 0){

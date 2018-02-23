@@ -6,9 +6,9 @@ var router = express.Router()
 router.route('/api/posts')
   .get(postControl.allPost)
   .post(postControl.addPost)
-  .put(postControl.updatePost)
 
 router.route('/api/posts/:id')
+  .put(postControl.updatePost)
 
 
 module.exports = router

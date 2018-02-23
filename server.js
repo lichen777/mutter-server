@@ -21,7 +21,7 @@ app.use(methodOverride('X-HTTP-Method-Override'))
 app.use(express.static('public'))
 
 // Loggers
-app.use(morgan('short'))
+app.use(morgan('dev'))
 app.use(logger)
 
 // Routes
